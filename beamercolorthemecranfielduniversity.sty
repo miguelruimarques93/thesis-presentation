@@ -1,0 +1,38 @@
+\ProvidesPackage{beamercolorthemecranfielduniversity}[2016/07/11]
+
+\definecolor{cu@yellow}      {rgb} {0.95,0.95,0.85}
+\definecolor{cu@gray}        {rgb} {0.90,0.90,0.90}
+\definecolor{cu@blue}        {rgb} {0.04,0.25,0.42}% {0.20,0.30,0.50}
+\definecolor{cu@lightblue}   {rgb} {0.00,0.60,0.77}%{0.92,0.93,0.95}
+\definecolor{cu@darkblueone} {rgb} {0.03,0.09,0.20}
+\definecolor{cu@darkbluetwo} {rgb} {0.25,0.45,0.5}
+
+\setbeamercolor{background canvas}{parent=palette primary}
+
+\setbeamercolor{palette primary}    {fg=cu@blue, bg=cu@lightblue}
+\setbeamercolor{palette secondary}  {fg=white!90!cu@blue, bg=cu@blue}
+\setbeamercolor{palette tertiary}   {fg=cu@blue, bg=cu@lightblue}
+\setbeamercolor{palette quaternary} {fg=cu@blue, bg=cu@lightblue}
+
+\setbeamercolor{structure}            {fg=cu@blue, bg=white}
+\setbeamercolor{title}                {parent=structure}
+\setbeamercolor{course}				  {fg=cu@blue, bg=white}
+\setbeamercolor{author}				  {fg=cu@lightblue, bg=white}
+\setbeamercolor{supervisor}			  {fg=cu@lightblue, bg=white}
+\setbeamercolor{subtitle}             {parent=title}
+\setbeamercolor{frametitle}           {fg=cu@blue}
+\setbeamercolor{framesubtitle}        {fg=cu@lightblue}
+\setbeamercolor{section in head/foot} {parent=palette secondary}
+\setbeamercolor{framenumber}		  {fg=cu@blue}
+\setbeamercolor{website} 			  {fg=cu@darkblueone}
+
+\setbeamercolor{alerted text}{fg=black!40!red}
+\setbeamercolor{example text}{fg=black!40!green}
+
+\setbeamercolor{block title}         {fg=structure.fg,    bg=cu@gray}
+\setbeamercolor{block title alerted} {fg=alerted text.fg, bg=alerted text.fg!10!bg}
+\setbeamercolor{block title example} {fg=example text.fg, bg=example text.fg!10!bg}
+
+\setbeamercolor{block body}         {fg=normal text.fg, bg=cu@gray}
+\setbeamercolor{block body alerted} {fg=normal text.fg, bg=alerted text.fg!10!bg}
+\setbeamercolor{block body example} {fg=normal text.fg, bg=example text.fg!10!bg}

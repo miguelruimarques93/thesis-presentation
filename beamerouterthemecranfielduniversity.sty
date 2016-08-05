@@ -1,0 +1,195 @@
+\ProvidesPackage{beamerouterthemecranfielduniversity}[2016/07/11]
+
+\RequirePackage{calc, pgfkeys, tikz}
+\usetikzlibrary[arrows]
+
+
+%<< Processing options >>
+
+\pgfkeys{/cu/.is family}
+
+\pgfqkeys{/cu}{%
+  .headline/.store in=\cu@headline,
+  headline/.is choice,
+  headline/none/.style={%
+    /cu/.headline=none},
+  headline/sections/.style={%
+    /cu/.headline=sections},
+  headimage/.store in=\cu@headimage,
+  titleimage/.store in=\cu@titleimage,
+  titlepage/.store in=\cu@titlepage}
+
+\providecommand\cranfielduniversityoptions{\pgfqkeys{/cu}}
+
+\AtBeginDocument{%
+  \pgfdeclareimage[width=4.26cm, interpolate=true]
+    {titleimage}{\cu@titleimage}
+  \pgfdeclareimage[width=1.22cm, interpolate=true]
+    {headimage}{\cu@headimage}
+}
+
+% default values
+\cranfielduniversityoptions{%
+  headline=none,% also 'sections'
+  headimage=images/cranfield-logo.png,
+  titlepage=picture,
+  titleimage=images/cranfield-logo.png}
+
+%>>
+
+
+\mode
+<presentation>
+
+%<< progress bar         >>
+
+% some computations dedicated to the cranfielduniversity
+\newdimen\cu@frame
+\newdimen\cu@bar
+\newdimen\cu@step
+\newdimen\cu@margin
+
+\cu@margin=2mm
+
+\newcommand\setlen[2]{#1\dimexpr#2\relax}
+\newcommand\gsetlen[2]{\global#1\dimexpr#2\relax}
+
+% this is used to fake the number of slides when there are appendices
+% at that time, the macro \insertintermediateframenumber is redefined to
+% be the last frame before the appendices
+\def\insertintermediateframenumber{\inserttotalframenumber}
+
+\defbeamertemplate*{section in head/foot}{cranfielduniversity}{%
+  \setbox\@tempbxa\hbox{\strut\insertsectionhead}%
+  \setdim\@tempdima{\wd\@tempbxa+4pt}%
+  \setdim\@tempdimb{\ht\@tempbxa+4pt}%
+  \begin{tikzpicture}
+    \usebeamercolor{section in head/foot}
+    \path [clip]
+      (-1pt,-1pt) rectangle (\@tempdima+1pt, \@tempdimb+1pt);
+    \path [draw=fg, thin, rounded corners=3pt]
+      (0,0) rectangle (\@tempdima, \@tempdimb);
+    \node [anchor=text, text=fg]
+      at (2pt,2pt) {\strut\insertsectionhead};
+  \end{tikzpicture}
+}
+
+\setbeamercolor{section in head/foot shaded}{fg=gray!80}
+\defbeamertemplate*{section in head/foot shaded}{cranfielduniversity}{%
+  \setbox\@tempbxa\hbox{\strut\insertsectionhead}%
+  \setdim\@tempdima{\wd\@tempbxa+4pt}%
+  \setdim\@tempdimb{\ht\@tempbxa+4pt}%
+  \begin{tikzpicture}
+    \usebeamercolor{section in head/foot shaded}
+    \path [clip]
+      (-1pt,-1pt) rectangle (\@tempdima+1pt, \@tempdimb+1pt);
+    \path [rounded corners=3pt]
+      (0,0) rectangle (\@tempdima, \@tempdimb);
+    \node [anchor=text, text=fg]
+      at (2pt,2pt) {\strut\insertsectionhead};
+  \end{tikzpicture}}
+
+\def\const@none{none}
+\def\const@sections{sections}
+
+\defbeamertemplate*{headline}{cranfielduniversity}{%
+  \vskip2pt
+  \leavevmode
+  \begin{beamercolorbox}
+    [%ignorestructure.bg=true, 
+    wd=\paperwidth, ht=4ex, dp=1.125ex]{structure.fg}
+    \ifnum\insertframenumber=1\else
+    \ifx\cu@headline\const@sections
+      \insertsectionnavigationhorizontal{\paperwidth}{}{}
+    \fi\fi
+  \end{beamercolorbox}}
+
+\defbeamertemplate*{footline}{cranfielduniversity}
+{
+	\hspace*{0.5cm}
+	{\usebeamerfont{framenumber}\usebeamercolor[fg]{framenumber}\insertframenumber\ / \inserttotalframenumber}
+	\vspace*{0.25cm}
+}
+
+%>>
+%<< title page           >>
+
+\newcommand\insertmaybe[1]{%
+  \expandafter\ifx\csname insert#1\endcsname\@empty\else
+    \endgraf
+    {\usebeamerfont{#1}%
+     \usebeamercolor[fg]{#1}%
+     \csname insert#1\endcsname}%
+  \fi}
+
+\defbeamertemplate*{title page}{cranfielduniversity}
+{
+  \parbox{0.39\textwidth}{
+  	\vspace*{-2cm}
+  	\hspace*{0.7cm}
+  	\pgfuseimage{titleimage}
+  }
+  \parbox{0.60\textwidth}{
+      % title
+      \vspace{1.5cm}
+      
+      {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle}%
+      
+      \vspace{0.25cm}
+      
+      {\usebeamerfont{course}\usebeamercolor[fg]{course}\insertmaybe{course}}
+      
+      \vspace{0.5cm}
+      
+      % optionnal content
+      {\usebeamerfont{author}\usebeamercolor[fg]{author}\insertmaybe{author}}
+      
+      \vspace{0.25cm}
+      
+	  {\usebeamerfont{supervisor}\usebeamercolor[fg]{supervisor}\insertmaybe{supervisor}}
+      
+      \vspace{0.5cm}
+      
+      \insertmaybe{date}
+      
+      \vspace{0.5cm}
+      
+      {\usebeamerfont{website}\usebeamercolor[fg]{website}www.cranfield.ac.uk}
+  }
+}
+
+%>>
+%<< background           >>
+
+\defbeamertemplate*{background canvas}{cranfielduniversity} {}
+
+\AtBeginDocument{%
+  \begingroup
+    \usebeamercolor{palette secondary}
+    \usebeamercolor{normal text}
+    \pgfdeclareverticalshading{background shading}\paperwidth{%
+      color(0cm)=(palette secondary.bg);% bottom
+      color(3cm)=(normal text.bg);
+      color(0.6\paperheight)=(normal text.bg);
+      color(0.9\paperheight)=(palette secondary.bg);
+      color(\paperheight)=(black!60!palette secondary.bg)}% top
+  \endgroup}
+
+%>>
+
+
+\mode
+<handout>{%
+  % background
+  \setbeamertemplate{background canvas}{}
+  % headline/footline
+  \setbeamertemplate{headline}{\vskip2mm}
+  \setbeamertemplate{footline}{}%
+  % title page
+  \setbeamertemplate{title page}[default]}
+
+
+%%% Local Variables:
+%%% TeX-master: "./demo-slides.tex"
+%%% End:
+

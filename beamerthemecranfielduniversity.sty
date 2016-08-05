@@ -1,0 +1,34 @@
+\ProvidesPackage{beamerthemecranfielduniversity}[2016/07/11]
+
+\RequirePackage{pgfkeys, tikz}
+
+
+%<< Processing options >>
+
+\pgfkeys{/cu/.is family}
+
+\providecommand\cranfielduniversityoptions{\pgfqkeys{/cu}}
+
+\newcommand{\supervisor}[1]{\newcommand{\insertsupervisor}{#1}}
+\newcommand{\course}[1]{\newcommand{\insertcourse}{#1}}
+
+%>>
+
+\usecolortheme{cranfielduniversity}
+\useinnertheme{cranfielduniversity}
+\usefonttheme{cranfielduniversity}
+\useoutertheme{cranfielduniversity}
+
+\setbeamertemplate{navigation symbols}{}
+
+\let\@NX\noexpand
+\let\@EA\expandafter
+
+\mode<handout>{%
+  \usepackage{pgfpages}
+  \pgfpagesuselayout{4 on 1}}
+
+
+%%% Local Variables:
+%%% TeX-master: "./demo-slides.tex"
+%%% End:

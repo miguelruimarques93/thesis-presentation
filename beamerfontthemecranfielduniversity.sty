@@ -1,0 +1,46 @@
+\ProvidesPackage{beamerfontthemecranfielduniversity}[2016/07/11]
+
+\usefonttheme{default}
+
+\usepackage{fontspec}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+% titlepage
+\setbeamerfont{title}     		{parent=structure, size=\LARGE, series=\bfseries}
+\setbeamerfont{course}     		{parent=structure, size=\scriptsize, series=\bfseries}
+\setbeamerfont{author}    		{parent=structure, size=\large, series=\bfseries}
+\setbeamerfont{supervisor}    	{parent=structure, size=\small, series=\bfseries}
+\setbeamerfont{date}      		{parent=structure, size=\normalsize, series=\bfseries}
+\setbeamerfont{frametitle}		{parent=structure, size=\Large, series=\bfseries}
+\setbeamerfont{framesubtitle}	{parent=structure, size=\large, series=\bfseries}
+\setbeamerfont{framenumber}		{parent=structure, size=\tiny}
+\setbeamerfont{website}			{parent=structure, size=\large}
+% items
+\setbeamerfont{itemize/enumerate body}       {size=\small}
+\setbeamerfont{itemize/enumerate subbody}    {size=\footnotesize}
+\setbeamerfont{itemize/enumerate subsubbody} {size=\scriptsize}
+
+\setbeamerfont{enumerate item}    {size=\tiny, series=\bfseries}
+\setbeamerfont{enumerate subitem} {size=\Tiny, series=\bfseries}
+
+% sections
+\setbeamerfont{section in toc} {parent=structure, size=\scriptsize, series=\bfseries}
+\setbeamerfont{subsection in toc} {parent=structure, size=\scriptsize, series=\bfseries}
+\setbeamerfont{section text in toc} {parent=section in toc, size=\normalsize}
+\setbeamerfont{subsection text in toc} {parent=subsection in toc, size=\scriptsize}
+\setbeamerfont{section in head/foot} {size=\tiny, series=\bfseries}
+
+% bibliography
+\setbeamerfont{bibliography entry author}{size=\scriptsize, shape=\upshape, series=\bfseries}
+\setbeamerfont{bibliography entry title}{size=\tiny, shape=\upshape, series=\mdseries}
+\setbeamerfont{bibliography entry journal}{size=\tiny, shape=\upshape, series=\mdseries}
+\setbeamerfont{bibliography entry note}{size=\tiny, shape=\upshape, series=\mdseries}
+\setbeamertemplate{bibliography item}[cranfielduniversity]
+
+% miscs
+\setbeamerfont{block title}{parent={structure, block body}, size=\normalsize, series=\bfseries}
+
+\expandafter\let\csname beamerx@\string\emph\endcsname\relax
+\renewcommand<>\emph[1]{{\only#2{\color{structure.fg}\bfseries}#1}}
